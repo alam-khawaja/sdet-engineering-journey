@@ -23,3 +23,5 @@ Commit real exercises, debugging notes, decisions, and evidence as you progress.
 ## Publish to a personal GitHub repository
 
 Create a repository named `sdet-engineering-journey`, copy this portfolio and the reusable skill into it, and review the files before publishing. Use GitHub's repository instructions to configure your own remote; do not copy an invented account URL. Commit small meaningful milestones. Link each completed project from PORTFOLIO.md.
+Week 1 practice: bugfix demo.
+
