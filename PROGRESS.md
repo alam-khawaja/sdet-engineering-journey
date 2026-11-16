@@ -2,13 +2,13 @@
 
 ## Current state
 
-Current focus: initial diagnostic.
-Current topic: CI/CD (diagnostic Q11) — teach + restate.
-Current phase: assessment.
-Next diagnostic question: 11 of 15.
-Completed topics: none verified (areas assessed with gaps — revision noted).
-Blocked topics: CI/CD pipelines unfamiliar (self-reported).
-Next action: learner restates minimum smoke pipeline (trigger, install, run, artifacts) in own words; then Q12.
+Current focus: Week 1 complete — ready for Week 2 (API auth + idempotency) when learner starts.
+Current topic: Week 1 wrap-up.
+Current phase: Week 1 gates largely done; optional push of journey docs.
+Next diagnostic question: n/a.
+Completed topics: Week 1 Git + HTTP traces (not full lifelong mastery).
+Blocked topics: LLM + MCP deferred as major checkpoints.
+Next action: optional push journey progress; or say “start week 2”.
 
 ## Workspace and project state
 
@@ -16,9 +16,9 @@ Learning repository path: `/Users/alam/sdet-engineering-journey`
 Active project path: `/Users/alam/sdet-engineering-journey`
 Work context: personal learning.
 Mode: Teach.
-Current milestone: initial diagnostic.
-Pending gates: assessment (15 questions); area ratings; first four weeks + CIP agreement.
-Evidence paths: `PROGRESS.md` (diagnostic record + session journal).
+Current milestone: Week 1 foundations (Git + HTTP); CIP Planned (API smoke).
+Pending gates: Week 1 Understand/Implement/Debug/Explain; LLM major checkpoint; MCP major checkpoint; CIP measurement later.
+Evidence paths: `PROGRESS.md`, `LEARNING_PLAN.md`, `CHECKLIST.md`, `CIP_TRACKER.md`.
 Personal GitHub repository URLs: https://github.com/alam-khawaja/sdet-engineering-journey
 Standing publication authorization: initial bootstrap push authorized by learner request to set up personal GitHub with this journey (2026-10-07). Further milestone pushes on request unless standing auth is expanded.
 
@@ -36,7 +36,11 @@ Standing publication authorization: initial bootstrap push authorized by learner
 | 8 | Database | Check WHERE columns, joins, filter indexed cols first, confirm index exists; claimed non-unique WHERE means index won’t work (2026-10-21) | Good instincts on filters/joins/indexes. Incorrect: indexes work on non-unique columns (selectivity affects usefulness). Main tool: EXPLAIN/query plan — seq scan vs index scan as data grows | Learn EXPLAIN; unique ≠ required for index use |
 | 9 | Playwright | Check error logs/fail point, console, resource load/render, deploys; try small waits + async/await; long XPaths flaky (2026-11-02) | Good on logs/console/locators. Prefer Playwright auto-wait + assert visible/enabled over sleep waits. Use trace/screenshot/video; CI slower/env diffs. Prefer role/test-id over long XPath | Avoid fixed sleeps; use trace |
 | 10 | Playwright | Same auth → store session and reuse; different auth levels → separate preserved states/scenarios (2026-11-02) | Correct storageState/role idea. Light on data isolation for parallel: unique users/records per worker, no shared mutable data, cleanup/fixtures | Add unique test data per parallel worker |
-| 11 | CI/CD | Learner: doesn't know pipelines yet (2026-11-02). Mentor teaching minimum smoke CI | Not familiar — awaiting restate | Restate trigger/install/run/artifacts |
+| 11 | CI/CD | Restate (2026-11-02): CI runs smoke script (Playwright/bash) with its config; on fail capture runtime errors, network failures, logs, screenshots for UI | Acceptable after teach. Add: trigger on push/PR, checkout, install deps, env/secrets, fail the job. Artifacts idea correct | Optional skim GitHub Actions workflow file |
+| 12 | Docker | Restate (2026-11-02): image≈class, container≈instance; unique ports or start fails (port in use); env points tests/app at stage vs prod DB/URL | Acceptable after teach. Class/object analogy works. Nuance: containers can share *internal* port if *host* mappings differ. Env for correct target env is right | Optional: try docker run -p and -e once |
+| 13 | Observability | Use request/correlation ID in logs to find fail point; match error to checks (pool exhaustion→DB connections, thread leak, unique constraint, NPE→null value) (2026-11-04) | Strong practical triage. Good link of log error → DB/system evidence. Light on stating a hypothesis first and confirming across services with same ID | Optional: timeline of one ID across services |
+| 14 | LLMs | Skipped for now by learner (2026-11-04); will learn in detail with core LLM checkpoint (models, tuning, fine-tuning, RAG, eval) | Deferred — not assessed as complete; not a pass | Major LLM checkpoint in LEARNING_PLAN.md |
+| 15 | MCP | Not familiar (2026-11-04); requested as major checkpoint | Deferred — not assessed as complete; not a pass | Major MCP checkpoint in LEARNING_PLAN.md |
 
 ## Session journal
 
@@ -157,3 +161,90 @@ Standing publication authorization: initial bootstrap push authorized by learner
 - Understanding demonstrated: none yet (explicit unfamiliar).
 - AI assistance: mentor short explanation; learner must restate.
 - Exact next action: learner restates Q11, then Q12.
+
+### 2026-11-02 — Diagnostic Q11 restated; advance to Q12
+
+- Topic: minimum CI smoke pipeline.
+- Understanding demonstrated: remote run of smoke suite with config; keep logs/screenshots/network/runtime errors on failure.
+- Gaps: trigger/checkout/install/secrets/fail-job less explicit.
+- Exact next action: answer diagnostic Docker Q12.
+
+### 2026-11-02 — Progress pushed to personal GitHub
+
+- Commit `212d0c0` on `alam-khawaja/sdet-engineering-journey` (PROGRESS through Q11 teach). Credential helper set to personal `gh` account for this repo.
+
+### 2026-11-02 — Diagnostic Q12: not familiar; teach mode
+
+- Topic: Docker image vs container; ports and env for tests.
+- Understanding demonstrated: none yet (explicit unfamiliar).
+- AI assistance: mentor short explanation; learner must restate.
+- Exact next action: learner restates Q12, then Q13.
+
+### 2026-11-02 — Diagnostic Q12 restated; advance to Q13
+
+- Topic: Docker basics for test runs.
+- Understanding demonstrated: image vs running instance; port conflicts; env selects stage vs prod targets.
+- Gaps: host vs container port mapping nuance.
+- Exact next action: answer diagnostic Observability Q13.
+
+### 2026-11-04 — Diagnostic Q13 answered; advance to Q14
+
+- Topic: 500 across services — logs, correlation ID, DB state.
+- Understanding demonstrated: follow request ID in logs; map error type to concrete checks (pool, threads, constraints, NPE).
+- Gaps: explicit hypothesis + multi-service timeline lightly implied.
+- Exact next action: answer diagnostic LLM Q14.
+
+### 2026-11-04 — Diagnostic Q14: not familiar; LLM main checkpoint added
+
+- Topic: evaluate LLM-generated tests; learner requested LLM/AI fundamentals (models, tuning, fine-tuning, RAG) as main checkpoint.
+- Understanding demonstrated: none yet on LLMs.
+- Plan update: LEARNING_PLAN.md milestone + LLM checkpoint detail added (Planned).
+- AI assistance: short teach on evaluation-before-adoption; full LLM curriculum deferred to dedicated checkpoint after diagnostic.
+- Exact next action: learner restates Q14 evaluation idea, then Q15.
+
+### 2026-11-04 — Q14 skipped; advance to Q15
+
+- Learner chose skip LLM detail for now; keep as major post-diagnostic checkpoint with cores.
+- Q14 left deferred (unchecked / not passed).
+- Exact next action: answer diagnostic MCP Q15.
+
+### 2026-11-04 — Q15 not familiar; MCP major checkpoint; diagnostic closed for routing
+
+- Topic: MCP host/client/server/tools.
+- Understanding demonstrated: none (explicit unfamiliar).
+- Plan update: MCP added as major checkpoint in LEARNING_PLAN; area ratings + first four weeks + CIP Planned recorded.
+- Exact next action: Week 1 Git stash + bug-fix branch verification exercise.
+
+### 2026-11-04 — Week 1 started (Git stash exercise)
+
+- Topic: preserve WIP with stash; isolate bug fix on branch; verify with diff/log.
+- Mode: Teach — learner runs commands.
+- Exact next action: Step 1 — create unfinished edit in journey repo and paste `git status` output.
+
+### 2026-11-04 — Week 1 Step 1 done (git status)
+
+- Evidence: learner showed modified CHECKLIST, CIP_TRACKER, LEARNING_PLAN, PROGRESS (unstaged).
+- Exact next action: `git stash push -m "week1-wip"` then `git status` (should be clean).
+
+### 2026-11-16 — Week 1 Git Implement complete; Explain pending
+
+- Evidence: stash week1-wip; branch fix/week1-demo; commit 83393db README only; diff/log vs main showed only that fix; on main with plan WIP restored (stash already empty when pop re-run — WIP already on desk).
+- Exact next action: learner Explain in 2–3 sentences; then HTTP/DevTools.
+
+### 2026-11-16 — Week 1 Git Explain done; start HTTP
+
+- Explain: stash keeps unsaved changes safe when switching branches; diff compares branches so you can check what’s unique on your branch.
+- Correction: that check is usually *before* merge (`git diff main` / `git log main..HEAD`), not “after merge.”
+- Exact next action: Network tab exercise — one HTTPS request report.
+
+### 2026-11-16 — Week 1 HTTP success trace
+
+- Evidence: GET XHR `nova-api/listings/filters?...` → 200 (learner-reported from Network tab).
+- Understanding: can read method/status/type for a successful API call.
+- Exact next action: classify one failed (4xx/5xx or red) request.
+
+### 2026-11-16 — Week 1 HTTP failure captured; Week 1 HTTP done
+
+- Evidence: GET `https://github.com/github-copilot/chat/repositories_search?limit=10` → **404**; learner asked if URL is “right.”
+- Feedback: 404 means that path wasn’t found for this call (feature/path/access)—good capture for learning; “right URL” = whatever the app requested; tester checks path/params/feature availability next.
+- Exact next action: push journey docs if asked; or start Week 2.
