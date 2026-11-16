@@ -10,14 +10,18 @@ Unchecked means pending, not failed. Every completed item needs dated evidence. 
 
 ## Active topic
 
-Topic: Week 1 — Git + HTTP/DevTools (closed 2026-11-16).
+Topic: Week 2 — API auth (401/403) + idempotency (started 2026-11-16).
 
-- [x] Understand: stash analogy; `-b`; diff vs commit/main; 401/403/404/500 map (2026-11-04/16).
-- [x] Implement: Git stash/branch/fix verify; Network success GET 200 xhr; Network failure GET Copilot `repositories_search` → 404 (2026-11-16).
-- [ ] Debug: optional deeper failure investigation (deferred).
-- [x] Explain: stash + diff purpose; 404 = path not found (2026-11-16).
+- [x] Understand: authn vs authz; 401 vs 403; same-key retry must not double-charge (2026-11-16).
+- [x] Implement: 401/403 cases; idempotency sketch — same key → no duplicate (409/safe replay); new key → new process (2026-11-16).
+- [ ] Debug: optional (later).
+- [x] Explain: unique key per transaction → cannot debit/withdraw twice (2026-11-16).
 
-Evidence: `fix/week1-demo` @ `83393db`; Network traces in PROGRESS journal 2026-11-16.
+Evidence: Week 2 answers in PROGRESS journal 2026-11-16.
+
+### Week 1 (closed)
+
+- [x] Git + HTTP/DevTools — see journal 2026-11-16 / `fix/week1-demo` @ `83393db`.
 
 ## Major checkpoints (deferred from diagnostic)
 

@@ -2,13 +2,13 @@
 
 ## Current state
 
-Current focus: Week 1 complete — ready for Week 2 (API auth + idempotency) when learner starts.
-Current topic: Week 1 wrap-up.
-Current phase: Week 1 gates largely done; optional push of journey docs.
+Current focus: Week 2 complete — ready for Week 3 (Playwright critical flow) when learner starts.
+Current topic: Week 2 wrap-up.
+Current phase: Week 2 gates done.
 Next diagnostic question: n/a.
-Completed topics: Week 1 Git + HTTP traces (not full lifelong mastery).
+Completed topics: Week 1; Week 2 auth + idempotency (design level).
 Blocked topics: LLM + MCP deferred as major checkpoints.
-Next action: optional push journey progress; or say “start week 2”.
+Next action: optional push; or say “start week 3” for Playwright sample smoke.
 
 ## Workspace and project state
 
@@ -16,8 +16,8 @@ Learning repository path: `/Users/alam/sdet-engineering-journey`
 Active project path: `/Users/alam/sdet-engineering-journey`
 Work context: personal learning.
 Mode: Teach.
-Current milestone: Week 1 foundations (Git + HTTP); CIP Planned (API smoke).
-Pending gates: Week 1 Understand/Implement/Debug/Explain; LLM major checkpoint; MCP major checkpoint; CIP measurement later.
+Current milestone: Week 2 API auth + idempotency; CIP Planned (API smoke).
+Pending gates: Week 2 Understand/Implement/Explain; LLM major checkpoint; MCP major checkpoint; CIP measurement later.
 Evidence paths: `PROGRESS.md`, `LEARNING_PLAN.md`, `CHECKLIST.md`, `CIP_TRACKER.md`.
 Personal GitHub repository URLs: https://github.com/alam-khawaja/sdet-engineering-journey
 Standing publication authorization: initial bootstrap push authorized by learner request to set up personal GitHub with this journey (2026-10-07). Further milestone pushes on request unless standing auth is expanded.
@@ -248,3 +248,24 @@ Standing publication authorization: initial bootstrap push authorized by learner
 - Evidence: GET `https://github.com/github-copilot/chat/repositories_search?limit=10` → **404**; learner asked if URL is “right.”
 - Feedback: 404 means that path wasn’t found for this call (feature/path/access)—good capture for learning; “right URL” = whatever the app requested; tester checks path/params/feature availability next.
 - Exact next action: push journey docs if asked; or start Week 2.
+
+### 2026-11-16 — Week 2 started (401/403 + idempotency)
+
+- Topic: design auth failure cases; then payment retry idempotency sketch.
+- Exact next action: learner writes 3 cases (no token, bad token, agent→admin).
+
+### 2026-11-16 — Week 2 auth cases correct
+
+- Evidence: 1) no token → 401  2) bad token → 401  3) agent→admin → 403.
+- Exact next action: idempotency retry sketch.
+
+### 2026-11-16 — Week 2 idempotency sketch
+
+- Evidence: same key → 409 / no duplicate txn; different key → process as new.
+- Feedback: Correct no-duplicate invariant. Note: some APIs return 200 with original result on replay (also valid); 409 is fine if documented. “Already in process” fits concurrent in-flight; completed retry often replays success.
+- Exact next action: Explain gate (2 sentences).
+
+### 2026-11-16 — Week 2 Explain done; Week 2 closed
+
+- Explain: idempotency key unique per transaction so money isn’t debited twice.
+- Exact next action: push if asked; or start Week 3 Playwright.
