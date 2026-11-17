@@ -2,13 +2,13 @@
 
 ## Current state
 
-Current focus: Week 2 complete — ready for Week 3 (Playwright critical flow) when learner starts.
-Current topic: Week 2 wrap-up.
-Current phase: Week 2 gates done.
+Current focus: Week 3 complete — ready for Week 4 (test data + CI) when learner starts.
+Current topic: Week 3 wrap-up.
+Current phase: Week 3 gates done.
 Next diagnostic question: n/a.
-Completed topics: Week 1; Week 2 auth + idempotency (design level).
+Completed topics: Week 1–3 (design/smoke level; not full mastery).
 Blocked topics: LLM + MCP deferred as major checkpoints.
-Next action: optional push; or say “start week 3” for Playwright sample smoke.
+Next action: optional push; or “start week 4” for parallel data isolation + GitHub Actions smoke.
 
 ## Workspace and project state
 
@@ -16,8 +16,8 @@ Learning repository path: `/Users/alam/sdet-engineering-journey`
 Active project path: `/Users/alam/sdet-engineering-journey`
 Work context: personal learning.
 Mode: Teach.
-Current milestone: Week 2 API auth + idempotency; CIP Planned (API smoke).
-Pending gates: Week 2 Understand/Implement/Explain; LLM major checkpoint; MCP major checkpoint; CIP measurement later.
+Current milestone: Week 3 Playwright API smoke; CIP Planned (API smoke).
+Pending gates: Week 3 Understand/Implement/Debug(trace)/Explain; LLM + MCP major checkpoints.
 Evidence paths: `PROGRESS.md`, `LEARNING_PLAN.md`, `CHECKLIST.md`, `CIP_TRACKER.md`.
 Personal GitHub repository URLs: https://github.com/alam-khawaja/sdet-engineering-journey
 Standing publication authorization: initial bootstrap push authorized by learner request to set up personal GitHub with this journey (2026-10-07). Further milestone pushes on request unless standing auth is expanded.
@@ -269,3 +269,26 @@ Standing publication authorization: initial bootstrap push authorized by learner
 
 - Explain: idempotency key unique per transaction so money isn’t debited twice.
 - Exact next action: push if asked; or start Week 3 Playwright.
+
+### 2026-11-16 — Week 3 started (Playwright API smoke)
+
+- Scaffolded personal `smoke/` against JSONPlaceholder (synthetic).
+- AI assistance: mentor created project skeleton; learner must install and run.
+- Exact next action: learner runs npm install + playwright test; paste output.
+
+### 2026-11-16 — Week 3 Implement passed
+
+- Evidence (learner-reported): 1 passed — GET /posts/1 returns 200 and id 1 (849ms).
+- Exact next action: deliberate fail + trace debug.
+
+### 2026-11-16 — Week 3 Debug done
+
+- Failure: Expected 999 Received 1; trace.zip produced; restored assertion; 1 passed again (743ms).
+- Exact next action: Explain what smoke proves / does not prove.
+
+### 2026-11-16 — Week 3 Explain done; Week 3 closed
+
+- Explain: proves failure when id ≠ 1; does not prove multi-valid-value cases or timeouts.
+- Feedback: also positively proves GET /posts/1 → 200 + id 1 + has title; limits also include no auth/UI/company system coverage.
+- Exact next action: push if asked; or start Week 4 CI + data isolation.
+

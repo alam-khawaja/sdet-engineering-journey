@@ -1,0 +1,14 @@
+{
+  "name": "sdet-journey-smoke",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Week 3 personal API smoke — synthetic public API only",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "show-report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}

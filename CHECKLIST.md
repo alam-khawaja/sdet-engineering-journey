@@ -10,14 +10,18 @@ Unchecked means pending, not failed. Every completed item needs dated evidence. 
 
 ## Active topic
 
-Topic: Week 2 — API auth (401/403) + idempotency (started 2026-11-16).
+Topic: Week 3 — Playwright API smoke (started 2026-11-16).
 
-- [x] Understand: authn vs authz; 401 vs 403; same-key retry must not double-charge (2026-11-16).
-- [x] Implement: 401/403 cases; idempotency sketch — same key → no duplicate (409/safe replay); new key → new process (2026-11-16).
-- [ ] Debug: optional (later).
-- [x] Explain: unique key per transaction → cannot debit/withdraw twice (2026-11-16).
+- [x] Understand: API request smoke via Playwright `request` (2026-11-16).
+- [x] Implement: `npx playwright test` — 1 passed `GET /posts/1` (2026-11-16, learner-reported).
+- [x] Debug: deliberate expect 999 → Expected 999 / Received 1 + trace.zip; restored to 1 → passed again (2026-11-16).
+- [x] Explain: asserts exact id 1 (fails other values); does not cover multi-valid-ids or timeout cases (2026-11-16). Also proves happy-path 200+shape for that one call.
 
-Evidence: Week 2 answers in PROGRESS journal 2026-11-16.
+Evidence: learner terminal pass/fail/pass; `smoke/tests/posts-smoke.spec.js`; Explain in PROGRESS journal.
+
+### Week 2 (closed)
+
+- [x] Auth 401/403 + idempotency design — journal 2026-11-16.
 
 ### Week 1 (closed)
 
