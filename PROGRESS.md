@@ -2,13 +2,13 @@
 
 ## Current state
 
-Current focus: Week 4 — test data isolation + CI.
-Current topic: Push for GitHub Actions CI (Explain drafted).
-Current phase: Implement (CI run evidence).
+Current focus: Week 5 complete — ready for Week 6 (reporting/reliability) when learner starts.
+Current topic: Week 5 wrap-up.
+Current phase: Week 5 gates done; CIP Measuring.
 Next diagnostic question: n/a.
-Completed topics: Week 1–3; Week 4 Understand + Explain drafted; local workers done.
+Completed topics: Week 1–5 (foundations + CIP deepen; not lifelong mastery).
 Blocked topics: LLM + MCP deferred as major checkpoints.
-Next action: push journey repo (personal alam-khawaja) so Actions runs smoke; confirm green URL/status.
+Next action: optional push; or start Week 6 failure-artifact / flaky-vs-real drill.
 
 ## Workspace and project state
 
@@ -16,8 +16,8 @@ Learning repository path: `/Users/alam/sdet-engineering-journey`
 Active project path: `/Users/alam/sdet-engineering-journey`
 Work context: personal learning.
 Mode: Teach.
-Current milestone: Week 4 CI + parallel data; CIP Planned (API smoke).
-Pending gates: Week 4 Understand/Implement (local workers + CI green)/Explain; LLM + MCP major checkpoints.
+Current milestone: Week 5 CIP deepen; CIP In Progress (API smoke).
+Pending gates: Week 5 create test + baseline; LLM + MCP major checkpoints.
 Evidence paths: `PROGRESS.md`, `LEARNING_PLAN.md`, `CHECKLIST.md`, `CIP_TRACKER.md`.
 Personal GitHub repository URLs: https://github.com/alam-khawaja/sdet-engineering-journey
 Standing publication authorization: initial bootstrap push authorized by learner request to set up personal GitHub with this journey (2026-10-07). Further milestone pushes on request unless standing auth is expanded.
@@ -313,4 +313,27 @@ Standing publication authorization: initial bootstrap push authorized by learner
 - Explain: pipelines check new commits before deployment; shared repo for collaboration.
 - Feedback: good. Also emphasize: automated run on a clean server (not “works on my machine”), PR/push trigger, save failure artifacts.
 - Exact next action: push for Actions evidence.
+
+### 2026-11-18 — Week 4 CI green; first four weeks closed
+
+- Push as personal `alam-khawaja` (needed `workflow` scope refresh).
+- Actions run `44349942865` **success** (~17s) for smoke workflow on main.
+- Exact next action: pick next learning focus (CIP deepen / LLM / more Playwright).
+
+### 2026-11-18 — Week 5 started (CIP deepen)
+
+- CIP → In Progress; added `posts-create-smoke.spec.js` (unique title per run).
+- Next four weeks sketched in LEARNING_PLAN (CIP → reporting → Docker light → observability → LLM/MCP).
+- Exact next action: learner runs create smoke; records manual baseline checklist + time.
+
+### 2026-11-18 — Week 5 create smoke + baseline
+
+- Evidence: POST create 1 passed (3.5s). Manual checklist (estimated 5–10 min): Postman GET check → POST create → verify via GET; auth/header setup adds friction.
+- Feedback: solid baseline thinking. Note: JSONPlaceholder fakes POST (may not persist for real GET-after-create); still valid learning for unique data + status asserts. Label impact preliminary/estimated.
+- Exact next action: Explain what improved vs GET-only; then push.
+
+### 2026-11-18 — Week 5 Explain done; Week 5 closed
+
+- Explain: adds create option previous GET-only lagged; create if missing and verify.
+- Exact next action: push if asked; Week 6 reporting/reliability next.
 

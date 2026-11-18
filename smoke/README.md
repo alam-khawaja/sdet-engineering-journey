@@ -16,6 +16,7 @@ npx playwright test --workers=2
 
 - Week 3: one stable critical flow (`posts-smoke.spec.js`) + fail/trace drill.
 - Week 4: parallel-safe cases (`posts-parallel-smoke.spec.js`) + GitHub Actions workflow with failure artifacts.
+- Week 5 / CIP: unique POST create (`posts-create-smoke.spec.js`) + manual baseline timing.
 
 ## CI
 

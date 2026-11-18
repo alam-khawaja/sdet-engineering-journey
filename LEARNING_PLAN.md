@@ -73,4 +73,15 @@ Then: deepen automation → Docker as needed → observability practice → **LL
 
 ## First CIP
 
-Critical API smoke validation — Status: **Planned** (see CIP_TRACKER.md). Personal/synthetic scope first; company CIP only with permitted metrics later.
+Critical API smoke validation — Status: **In Progress** (see CIP_TRACKER.md). Personal/synthetic scope first; company CIP only with permitted metrics later.
+
+## Next four weeks (from 2026-11-18)
+
+| Week | Focus | Exercise | Gate signal |
+|---|---|---|---|
+| 5 | Deepen API smoke CIP | Unique POST create + GET asserts; define manual baseline checklist/time | Create test green; baseline written |
+| 6 | Reporting + reliability | Failure artifact drill; flaky vs real failure notes | Explain artifact use; one classified failure |
+| 7 | Docker refresh (light) | Run smoke thoughts vs containerized node; or document when Docker helps | Explain image vs container for CI runners |
+| 8 | Observability practice | Hypothesis → correlation-style notes on a failed API case | Document Expected→Actual→Evidence chain |
+
+Then: **LLM major checkpoint** → **MCP major checkpoint**.

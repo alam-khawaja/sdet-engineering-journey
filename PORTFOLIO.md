@@ -2,7 +2,7 @@
 
 | Project | Status | Concepts demonstrated | My contribution | Evidence | Limitations |
 |---|---|---|---|---|---|
-| [smoke/](smoke/) API smoke (JSONPlaceholder) | In progress (Week 3 done) | Playwright request API; status/body asserts; deliberate fail + trace; Expected vs Received | Ran install/tests; broke/restored assertion; explained limits | Local `npx playwright test` pass; fail with trace.zip; [smoke/README.md](smoke/README.md) | One endpoint; exact id only; no multi-valid ids; no timeout cases; no auth/UI; synthetic public API only — not company impact |
+| [smoke/](smoke/) API smoke (JSONPlaceholder) | Week 3–4 done | Playwright request API; parallel-safe cases; GHA CI + failure artifacts; Expected vs Received debug | Ran local workers; explained isolation/CI; authorized personal push | Local 3 passed `--workers=2`; Actions success [run 44349942865](https://github.com/alam-khawaja/sdet-engineering-journey/actions/runs/44349942865); [smoke/README.md](smoke/README.md) | Synthetic API only; no auth/UI; CIP impact not measured; optional failure-artifact drill not run (CI green) |
 
 For each project add a README with problem, setup/run commands, architecture, decisions/trade-offs, meaningful checks, debugging story, measured results, AI assistance, and limitations. Link code and reproducible evidence.
 
