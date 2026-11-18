@@ -9,9 +9,15 @@ No company credentials, tickets, or data.
 cd smoke
 npm install
 npx playwright test
+npx playwright test --workers=2
 ```
 
 ## Intent
 
-One stable critical flow: fetch a post and assert status + id.  
-Later: deliberate failure + Playwright trace (Week 3 debug gate).
+- Week 3: one stable critical flow (`posts-smoke.spec.js`) + fail/trace drill.
+- Week 4: parallel-safe cases (`posts-parallel-smoke.spec.js`) + GitHub Actions workflow with failure artifacts.
+
+## CI
+
+Workflow: `.github/workflows/smoke.yml`  
+On failure it uploads `playwright-report/` and `test-results/` as artifacts.

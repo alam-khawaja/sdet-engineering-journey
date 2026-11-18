@@ -2,13 +2,13 @@
 
 ## Current state
 
-Current focus: Week 3 complete — ready for Week 4 (test data + CI) when learner starts.
-Current topic: Week 3 wrap-up.
-Current phase: Week 3 gates done.
+Current focus: Week 4 — test data isolation + CI.
+Current topic: Push for GitHub Actions CI (Explain drafted).
+Current phase: Implement (CI run evidence).
 Next diagnostic question: n/a.
-Completed topics: Week 1–3 (design/smoke level; not full mastery).
+Completed topics: Week 1–3; Week 4 Understand + Explain drafted; local workers done.
 Blocked topics: LLM + MCP deferred as major checkpoints.
-Next action: optional push; or “start week 4” for parallel data isolation + GitHub Actions smoke.
+Next action: push journey repo (personal alam-khawaja) so Actions runs smoke; confirm green URL/status.
 
 ## Workspace and project state
 
@@ -16,8 +16,8 @@ Learning repository path: `/Users/alam/sdet-engineering-journey`
 Active project path: `/Users/alam/sdet-engineering-journey`
 Work context: personal learning.
 Mode: Teach.
-Current milestone: Week 3 Playwright API smoke; CIP Planned (API smoke).
-Pending gates: Week 3 Understand/Implement/Debug(trace)/Explain; LLM + MCP major checkpoints.
+Current milestone: Week 4 CI + parallel data; CIP Planned (API smoke).
+Pending gates: Week 4 Understand/Implement (local workers + CI green)/Explain; LLM + MCP major checkpoints.
 Evidence paths: `PROGRESS.md`, `LEARNING_PLAN.md`, `CHECKLIST.md`, `CIP_TRACKER.md`.
 Personal GitHub repository URLs: https://github.com/alam-khawaja/sdet-engineering-journey
 Standing publication authorization: initial bootstrap push authorized by learner request to set up personal GitHub with this journey (2026-10-07). Further milestone pushes on request unless standing auth is expanded.
@@ -291,4 +291,26 @@ Standing publication authorization: initial bootstrap push authorized by learner
 - Explain: proves failure when id ≠ 1; does not prove multi-valid-value cases or timeouts.
 - Feedback: also positively proves GET /posts/1 → 200 + id 1 + has title; limits also include no auth/UI/company system coverage.
 - Exact next action: push if asked; or start Week 4 CI + data isolation.
+
+### 2026-11-18 — Week 4 started (parallel data + CI)
+
+- Added `posts-parallel-smoke.spec.js`, workers config, `.github/workflows/smoke.yml` (artifacts on failure).
+- AI assistance: mentor scaffolded CI/parallel files; learner must explain + run + authorize push for Actions.
+- Exact next action: learner explains shared-data risk; runs `npx playwright test --workers=2`.
+
+### 2026-11-18 — Week 4 local workers run passed
+
+- Evidence: `npx playwright test --workers=2` → 3 passed (2.9s): posts/1, posts/2, original posts-smoke.
+- Exact next action: Understand answer (shared data risk); then push for Actions.
+
+### 2026-11-18 — Week 4 Understand done
+
+- Evidence: shared data creates test dependency (e.g. delete before update) → flakiness; tests should be independent/isolated.
+- Exact next action: push for GitHub Actions CI.
+
+### 2026-11-18 — Week 4 Explain drafted
+
+- Explain: pipelines check new commits before deployment; shared repo for collaboration.
+- Feedback: good. Also emphasize: automated run on a clean server (not “works on my machine”), PR/push trigger, save failure artifacts.
+- Exact next action: push for Actions evidence.
 

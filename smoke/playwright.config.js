@@ -9,12 +9,15 @@ module.exports = defineConfig({
   testDir: './tests',
   timeout: 30_000,
   retries: 0,
+  fullyParallel: true,
+  workers: process.env.CI ? 2 : undefined,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
     baseURL: 'https://jsonplaceholder.typicode.com',
     extraHTTPHeaders: {
       Accept: 'application/json',
     },
-    trace: 'on-first-retry',
+    // On CI failures, keep evidence for the artifact upload step
+    trace: 'retain-on-failure',
   },
 });

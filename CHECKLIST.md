@@ -10,14 +10,18 @@ Unchecked means pending, not failed. Every completed item needs dated evidence. 
 
 ## Active topic
 
-Topic: Week 3 — Playwright API smoke (started 2026-11-16).
+Topic: Week 4 — parallel data + GitHub Actions CI (started 2026-11-18).
 
-- [x] Understand: API request smoke via Playwright `request` (2026-11-16).
-- [x] Implement: `npx playwright test` — 1 passed `GET /posts/1` (2026-11-16, learner-reported).
-- [x] Debug: deliberate expect 999 → Expected 999 / Received 1 + trace.zip; restored to 1 → passed again (2026-11-16).
-- [x] Explain: asserts exact id 1 (fails other values); does not cover multi-valid-ids or timeout cases (2026-11-16). Also proves happy-path 200+shape for that one call.
+- [x] Understand: shared mutable data → race/order dependency (update vs delete) → flaky; tests must be independent/isolated (2026-11-18).
+- [~] Implement: local `--workers=2` → 3 passed (2026-11-18). CI Actions run pending push.
+- [ ] Debug: optional CI failure artifact inspection.
+- [x] Explain: CI pipeline checks new commits before deploy; shared repo for team access/contribute (2026-11-18). Also: runs off laptop, same machine for everyone, failure artifacts.
 
-Evidence: learner terminal pass/fail/pass; `smoke/tests/posts-smoke.spec.js`; Explain in PROGRESS journal.
+Evidence: learner terminal — 3 passed (2.9s) with 2 workers; CI pending push.
+
+### Week 3 (closed)
+
+- [x] Playwright API smoke + fail/trace — journal 2026-11-16 / `smoke/`.
 
 ### Week 2 (closed)
 
