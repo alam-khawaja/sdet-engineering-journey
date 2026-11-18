@@ -2,23 +2,23 @@
 
 ## Current state
 
-Current focus: Week 5 complete — ready for Week 6 (reporting/reliability) when learner starts.
-Current topic: Week 5 wrap-up.
-Current phase: Week 5 gates done; CIP Measuring.
+Current focus: Week 6 — portfolio booking API demo + reporting/reliability.
+Current topic: Debug drill — deliberate failure in booking lifecycle, read HTML report/trace, classify failure.
+Current phase: Debug (Week 6).
 Next diagnostic question: n/a.
-Completed topics: Week 1–5 (foundations + CIP deepen; not lifelong mastery).
+Completed topics: Week 1–5.
 Blocked topics: LLM + MCP deferred as major checkpoints.
-Next action: optional push; or start Week 6 failure-artifact / flaky-vs-real drill.
+Next action: change lifecycle delete expectation 201 → 200, run tests, open report, classify failure; then restore 201.
 
 ## Workspace and project state
 
 Learning repository path: `/Users/alam/sdet-engineering-journey`
-Active project path: `/Users/alam/sdet-engineering-journey`
+Active project path: `/Users/alam/sdet-engineering-journey/projects/booking-api-automation`
 Work context: personal learning.
 Mode: Teach.
-Current milestone: Week 5 CIP deepen; CIP In Progress (API smoke).
-Pending gates: Week 5 create test + baseline; LLM + MCP major checkpoints.
-Evidence paths: `PROGRESS.md`, `LEARNING_PLAN.md`, `CHECKLIST.md`, `CIP_TRACKER.md`.
+Current milestone: Week 6 booking API demo + reliability reporting.
+Pending gates: Week 6 Understand/Implement/Debug/Explain; LLM + MCP major checkpoints.
+Evidence paths: `projects/booking-api-automation/`, `PROGRESS.md`, `PORTFOLIO.md`.
 Personal GitHub repository URLs: https://github.com/alam-khawaja/sdet-engineering-journey
 Standing publication authorization: initial bootstrap push authorized by learner request to set up personal GitHub with this journey (2026-10-07). Further milestone pushes on request unless standing auth is expanded.
 
@@ -336,4 +336,16 @@ Standing publication authorization: initial bootstrap push authorized by learner
 
 - Explain: adds create option previous GET-only lagged; create if missing and verify.
 - Exact next action: push if asked; Week 6 reporting/reliability next.
+
+### 2026-11-18 — Week 6 started: booking API portfolio project
+
+- Scaffolded `projects/booking-api-automation` (Restful Booker): auth, lifecycle create/get/delete, unique data, CI workflow with always-upload report artifacts.
+- Why: stronger interview demo than JSONPlaceholder GET/POST alone; Week 6 reporting/reliability rides on this project.
+- AI assistance: mentor scaffold; learner must install, run, debug, explain.
+- Exact next action: learner runs npm install + playwright test in booking project.
+
+### 2026-11-18 — Week 6 Implement passed
+
+- Evidence (learner-reported): 3 passed in 2.8s with 3 workers — lifecycle create/get/delete, bad auth, valid auth.
+- Exact next action: Debug drill on delete status assertion.
 

@@ -1,0 +1,14 @@
+{
+  "name": "booking-api-automation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio demo: Playwright API automation against Restful Booker (synthetic public API)",
+  "scripts": {
+    "test": "playwright test",
+    "test:workers": "playwright test --workers=2",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}

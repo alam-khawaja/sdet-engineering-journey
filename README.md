@@ -12,6 +12,12 @@ Review target: June 2027. Status: diagnostic pending; no mastery claimed yet.
 - [Projects and interview evidence](PORTFOLIO.md)
 - [Improvement tracker](CIP_TRACKER.md)
 
+## Demo projects
+
+- **[Booking API automation](projects/booking-api-automation/)** — main interview demo (auth + booking lifecycle + CI reports)
+- **[Async webhook state machine QA](projects/async-webhook-state-machine-qa/)** — Python/pytest: race conditions, idempotency, DLQ resilience, signed webhooks
+- [JSONPlaceholder smoke](smoke/) — earlier learning CIP slice
+
 ## Working with Cursor
 
 The included `.cursor/rules/sdet-mentor.mdc` points Cursor to the persistent state. Start with: “Read CURSOR_MENTOR.md and the tracking files. Resume my current checkpoint.”
