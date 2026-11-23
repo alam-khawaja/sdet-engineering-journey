@@ -2,13 +2,13 @@
 
 ## Current state
 
-Current focus: Week 6 — portfolio booking API demo + reporting/reliability.
-Current topic: Debug drill — deliberate failure in booking lifecycle, read HTML report/trace, classify failure.
-Current phase: Debug (Week 6).
+Current focus: Week 7 — Docker refresh (light).
+Current topic: Image vs container; running a test suite inside a container.
+Current phase: Implement (Week 7).
 Next diagnostic question: n/a.
-Completed topics: Week 1–5.
+Completed topics: Week 1–6.
 Blocked topics: LLM + MCP deferred as major checkpoints.
-Next action: change lifecycle delete expectation 201 → 200, run tests, open report, classify failure; then restore 201.
+Next action: Week 7 Implement — run booking suite inside the Playwright image (Docker not installed locally; choose CI container vs local Colima).
 
 ## Workspace and project state
 
@@ -16,8 +16,8 @@ Learning repository path: `/Users/alam/sdet-engineering-journey`
 Active project path: `/Users/alam/sdet-engineering-journey/projects/booking-api-automation`
 Work context: personal learning.
 Mode: Teach.
-Current milestone: Week 6 booking API demo + reliability reporting.
-Pending gates: Week 6 Understand/Implement/Debug/Explain; LLM + MCP major checkpoints.
+Current milestone: Week 7 Docker refresh (light).
+Pending gates: Week 7 Understand/Implement/Debug/Explain; LLM + MCP major checkpoints.
 Evidence paths: `projects/booking-api-automation/`, `PROGRESS.md`, `PORTFOLIO.md`.
 Personal GitHub repository URLs: https://github.com/alam-khawaja/sdet-engineering-journey
 Standing publication authorization: initial bootstrap push authorized by learner request to set up personal GitHub with this journey (2026-10-07). Further milestone pushes on request unless standing auth is expanded.
@@ -348,4 +348,23 @@ Standing publication authorization: initial bootstrap push authorized by learner
 
 - Evidence (learner-reported): 3 passed in 2.8s with 3 workers — lifecycle create/get/delete, bad auth, valid auth.
 - Exact next action: Debug drill on delete status assertion.
+
+### 2026-11-19 — Week 6 Debug passed
+
+- Evidence (learner-reported): changed delete expectation to 200; test failed with Received 201. Learner classified it as a wrong assertion (bad test), not a product bug or flakiness.
+- Exact next action: restore `toBe(201)`, re-run green; then Explain gate.
+
+### 2026-11-23 — Week 6 Explain done; Week 6 closed
+
+- Assertion restored to 201.
+- Explain (learner): unique data isolates tests — if one test deletes while another updates shared data, order decides who fails; each test creates its own data, verifies it, then cleans up.
+- Mentor addition: GET-only smoke can never catch broken writes (create/delete); the lifecycle test does.
+- Exact next action: Week 7 Docker light — Understand gate.
+
+### 2026-11-23 — Week 7 Understand passed
+
+- Explain (learner): image is the blueprint, container is the running implementation; for UI tests needing specific node modules/browsers, a pinned image beats machines with different versions.
+- Mentor polish: image = frozen, versioned setup; container = disposable running copy; same image locally and in CI removes environment drift.
+- Finding: Docker is not installed on the learner's Mac.
+- Exact next action: choose Implement route (CI container job vs local Colima install).
 

@@ -15,20 +15,25 @@ on:
 jobs:
   api-tests:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.65.1-noble
+      options: --user 1001
     defaults:
       run:
         working-directory: projects/booking-api-automation
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: npm
-          cache-dependency-path: projects/booking-api-automation/package-lock.json
+      - name: Show container environment
+        run: |
+          head -2 /etc/os-release
+          node --version
+          echo "uid=$(id -u)"
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          npx playwright --version
 
       - name: Run API tests
         run: npx playwright test --workers=2

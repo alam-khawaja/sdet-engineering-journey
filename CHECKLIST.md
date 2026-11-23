@@ -10,14 +10,21 @@ Unchecked means pending, not failed. Every completed item needs dated evidence.
 
 ## Active topic
 
-Topic: Week 6 — booking API demo project + reporting/reliability (started 2026-11-18).
+Topic: Week 7 — Docker refresh (light): image vs container, when Docker helps CI (started 2026-11-23).
 
-- [ ] Understand: what this demo proves for interviews; flaky vs real vs bad assertion.
+- [x] Understand: image = blueprint, container = running instance; pinned image avoids version drift across machines for UI tests — learner 2026-11-23.
+- [ ] Implement: run one suite inside the official Playwright Docker image.
+- [ ] Debug: break one thing (port/env/mount) and read the error.
+- [ ] Explain: when Docker helps a test suite and when it is overhead.
+
+### Week 6 (closed 2026-11-23)
+
+- [x] Understand: classified failure types (bad assertion vs real bug vs flaky) during Debug — 2026-11-19.
 - [x] Implement: booking-api-automation 3 passed (2.8s, 3 workers) — learner run 2026-11-18.
-- [ ] Debug: deliberate fail → HTML report/trace → classify failure type.
-- [ ] Explain: why create→get→delete + unique data is a stronger demo than GET-only smoke.
+- [x] Debug: expected 200, received 201 on delete → classified as bad assertion (API contract is 201), not a product bug or flake — learner 2026-11-19.
+- [x] Explain: unique data + create→verify→cleanup keeps tests isolated so parallel delete/update can't break each other — 2026-11-23.
 
-Evidence: pending learner run of `projects/booking-api-automation`.
+Evidence: booking-api CI green on 6a817cf; assertion restored to 201.
 
 ### Week 5 (closed)
 
