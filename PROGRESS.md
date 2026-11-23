@@ -4,11 +4,11 @@
 
 Current focus: Week 7 — Docker refresh (light).
 Current topic: Image vs container; running a test suite inside a container.
-Current phase: Implement (Week 7).
+Current phase: Debug (Week 7).
 Next diagnostic question: n/a.
 Completed topics: Week 1–6.
 Blocked topics: LLM + MCP deferred as major checkpoints.
-Next action: Week 7 Implement — run booking suite inside the Playwright image (Docker not installed locally; choose CI container vs local Colima).
+Next action: Week 7 Debug — learner typos the image tag (noble → nobel), pushes, reads the "Initialize containers" error, classifies it, restores.
 
 ## Workspace and project state
 
@@ -367,4 +367,12 @@ Standing publication authorization: initial bootstrap push authorized by learner
 - Mentor polish: image = frozen, versioned setup; container = disposable running copy; same image locally and in CI removes environment drift.
 - Finding: Docker is not installed on the learner's Mac.
 - Exact next action: choose Implement route (CI container job vs local Colima install).
+
+### 2026-11-23 — Week 7 Implement passed (CI container route)
+
+- Learner chose CI container route (no local Docker). Workflow `booking-api.yml` now uses `container: mcr.microsoft.com/playwright:v1.65.1-noble`, `--user 1001`; setup-node removed.
+- Evidence (learner-read log, run 45178015825): image pulled; host OS Ubuntu 26.04.1 vs container Ubuntu 24.04.5 (noble); Node v26.13.1 from image; uid=1001; 3 passed (935ms).
+- Key insight: host and container report different OS — the tests only see the image.
+- AI assistance: mentor wrote the workflow change and pushed on request; learner read and interpreted the log.
+- Exact next action: Debug drill — break the image tag and read the error.
 

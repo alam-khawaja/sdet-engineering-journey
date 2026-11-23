@@ -4,19 +4,19 @@ on:
   push:
     branches: [main]
     paths:
-      - 'projects/booking-api-automation/**'
-      - '.github/workflows/booking-api.yml'
+      - "projects/booking-api-automation/**"
+      - ".github/workflows/booking-api.yml"
   pull_request:
     paths:
-      - 'projects/booking-api-automation/**'
-      - '.github/workflows/booking-api.yml'
+      - "projects/booking-api-automation/**"
+      - ".github/workflows/booking-api.yml"
   workflow_dispatch:
 
 jobs:
   api-tests:
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.65.1-noble
+      image: mcr.microsoft.com/playwright:v1.65.1-nobel
       options: --user 1001
     defaults:
       run:

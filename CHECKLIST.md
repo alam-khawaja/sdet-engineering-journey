@@ -13,7 +13,7 @@ Unchecked means pending, not failed. Every completed item needs dated evidence.
 Topic: Week 7 — Docker refresh (light): image vs container, when Docker helps CI (started 2026-11-23).
 
 - [x] Understand: image = blueprint, container = running instance; pinned image avoids version drift across machines for UI tests — learner 2026-11-23.
-- [ ] Implement: run one suite inside the official Playwright Docker image.
+- [x] Implement: booking suite ran in CI inside `playwright:v1.65.1-noble` — 3 passed (935ms); host Ubuntu 26.04 vs container 24.04.5, Node v26.13.1, uid 1001 (run 45178015825) — 2026-11-23.
 - [ ] Debug: break one thing (port/env/mount) and read the error.
 - [ ] Explain: when Docker helps a test suite and when it is overhead.
 
