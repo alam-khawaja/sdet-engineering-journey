@@ -155,31 +155,58 @@ For the chosen commit it:
 
 The verdict is `VALIDATED` (exit 0) when at least one mutant is killed post-fix but survives pre-fix. In other words, pymutate would have flagged the missing test before the bug shipped. The tree must be clean before it starts.
 
-### Results on pypa/packaging
+### Results on real open-source projects
 
-These were run locally on 2026-11-24 against a fresh clone of [pypa/packaging](https://github.com/pypa/packaging) (`main` at `8fb1b46`). Environment: macOS, Python 3.15.1, pytest 9.2.0, coverage 7.17.5. packaging was installed in editable mode in its own venv, passed with `--target-python`.
+All runs were done locally on 2026-11-24 on macOS, against fresh clones:
 
-| Fix commit | Change | Tests used | Mutants on changed lines | Pre-fix → post-fix kill score | Verdict |
-|---|---|---|---|---|---|
-| [`71de7cb`](https://github.com/pypa/packaging/commit/71de7cb) | pylock rejects `2.0` prereleases: `< Version("2")` became `< Version("2.dev0")` | `tests/test_pylock.py` | 3 | 66.67% → 100% | **VALIDATED** (6 s) |
-| [`4d7875f`](https://github.com/pypa/packaging/commit/4d7875f) | Markers nested deeper than 200 raise `InvalidMarker` | full `tests/` (~7,900 tests) | 2 | 0% → 100% | **VALIDATED** (~11 min) |
-| [`55cbf1b`](https://github.com/pypa/packaging/commit/55cbf1b) | `if version is None: inclusive = False` | full `tests/` | 0 | — | NOT VALIDATED (no mutants) |
+- [pypa/packaging](https://github.com/pypa/packaging): `main` at `8fb1b46`.
+- [encode/httpx](https://github.com/encode/httpx): `master` at `7cff5f7`.
+- [dateutil/dateutil](https://github.com/dateutil/dateutil): `master` at `261e291`.
 
-Raw `--json` output for each run is in [`benchmarks/packaging/`](benchmarks/packaging/).
+pymutate itself ran on Python 3.15.1. Each project was installed in editable mode in its own venv and passed with `--target-python`.
 
-Fix-detected mutants, meaning they survived the parent commit's tests and were killed by the fix commit's tests:
+- **packaging and dateutil** ran on Python 3.15.1 (pytest 9.2.0, coverage 7.17.5).
+- **httpx** ran on **Python 3.9.6** (pytest 7.2.2, coverage 7.10.7). Its April 2023 fix needs `httpcore<0.18`, which does not import on Python 3.15. That run doubles as a real-world check of the cross-virtualenv worker.
+
+| Project | Fix commit | Change | Tests used | Mutants on changed lines | Pre-fix → post-fix kill score | Verdict |
+|---|---|---|---|---|---|---|
+| packaging | [`71de7cb`](https://github.com/pypa/packaging/commit/71de7cb) | pylock rejects `2.0` prereleases: `< Version("2")` became `< Version("2.dev0")` | `tests/test_pylock.py` | 3 | 66.67% → 100% | **VALIDATED** (6 s) |
+| packaging | [`4d7875f`](https://github.com/pypa/packaging/commit/4d7875f) | Markers nested deeper than 200 raise `InvalidMarker` | full `tests/` (~7,900 tests) | 2 | 0% → 100% | **VALIDATED** (~11 min) |
+| packaging | [`55cbf1b`](https://github.com/pypa/packaging/commit/55cbf1b) | `if version is None: inclusive = False` | full `tests/` | 0 | — | NOT VALIDATED (no mutants) |
+| httpx | [`15d09a3`](https://github.com/encode/httpx/commit/15d09a3) | `NO_PROXY` supports IPv4, IPv6 and `localhost` | `tests/test_utils.py` | 1 | 0% → 100% | **VALIDATED** (8 s) |
+| dateutil | [`d23ff76`](https://github.com/dateutil/dateutil/commit/d23ff76) | `relativedelta(yearday=366)` no longer resolves to Dec 30 in leap years | `tests/test_relativedelta.py` | 6 | 0% → 66.67% | **VALIDATED** (10 s) |
+| dateutil | [`99f6653`](https://github.com/dateutil/dateutil/commit/99f6653) | Correct dates for day-of-year rules in TZ strings | `tests/test_tzfile.py` | 17 | 94.12% → 100% | **VALIDATED** (49 s) |
+| dateutil | [`2283058`](https://github.com/dateutil/dateutil/commit/2283058) | `dst()` for zones that end in permanent DST | `tests/test_tzfile.py` | — | — | ERROR (exit 2): pre-fix baseline fails |
+
+Raw `--json` output for each completed run is in [`benchmarks/`](benchmarks/).
+
+Fix-detected mutants, meaning they survived (or were never reached by) the parent commit's tests and were killed by the fix commit's tests:
 
 ```
-71de7cb  src/packaging/pylock.py:611   [HIGH - BOUNDARY GAP]     Replace `<` with `<=` in `Version('1') <= pylock.lock_version < Version('2.dev0')`
-4d7875f  src/packaging/_parser.py:395  [HIGH - BOUNDARY GAP]     Replace `>=` with `>` in `depth >= _MAX_MARKER_NESTING`
-4d7875f  src/packaging/_parser.py:407  [MEDIUM - CALCULATION BUG] Replace `+` with `-` in `depth + 1`
+packaging 71de7cb  src/packaging/pylock.py:611        [HIGH - BOUNDARY GAP]      Replace `<` with `<=` in `Version('1') <= pylock.lock_version < Version('2.dev0')`
+packaging 4d7875f  src/packaging/_parser.py:395       [HIGH - BOUNDARY GAP]      Replace `>=` with `>` in `depth >= _MAX_MARKER_NESTING`
+packaging 4d7875f  src/packaging/_parser.py:407       [MEDIUM - CALCULATION BUG] Replace `+` with `-` in `depth + 1`
+httpx     15d09a3  httpx/_utils.py:269                [HIGH - BOUNDARY GAP]      Replace `==` with `!=` in `hostname.lower() == 'localhost'`   (UNCOVERED -> KILLED)
+dateutil  d23ff76  src/dateutil/relativedelta.py:215  [HIGH - BOUNDARY GAP]      Replace `<` with `<=` in `59 < yearday < 366`
+dateutil  d23ff76  src/dateutil/relativedelta.py:215  [HIGH - BOUNDARY GAP]      Shift comparison boundary 366 -> 367 in `59 < yearday < 366`
+dateutil  d23ff76  src/dateutil/relativedelta.py:215  [HIGH - BOUNDARY GAP]      Shift comparison boundary 366 -> 365 in `59 < yearday < 366`
+dateutil  d23ff76  src/dateutil/relativedelta.py:215  [HIGH - BOUNDARY GAP]      Shift comparison boundary 59 -> 60 in `59 < yearday < 366`
+dateutil  99f6653  src/dateutil/tz/_tzfile.py:1269    [HIGH - BOUNDARY GAP]      Shift comparison boundary 59 -> 58 in `d >= 59`
 ```
 
-For `71de7cb`, the fix added `"2.0.dev0"` to the unsupported-version test cases. That is exactly the input that tells `<` from `<=`, and the parent's tests had no such case. In other words, pymutate would have pointed at the missing test before the bug shipped.
+What the runs show:
 
-`55cbf1b` shows a real limit. Its changed lines contain an `is None` check guarding an assignment. pymutate does not mutate `is`/`is not`, and it only bypasses guards whose body ends in `return` or `raise`. The tool reports this as NOT VALIDATED (exit 1) instead of claiming a result.
+- **packaging `71de7cb`:** the fix added `"2.0.dev0"` to the unsupported-version test cases. That is exactly the input that tells `<` from `<=`, and the parent's tests had no such case.
+- **httpx `15d09a3`:** the parent's tests never executed the new `localhost` branch at all. The mutant was `UNCOVERED` before and `KILLED` after.
+- **dateutil `d23ff76`:** the fix itself is a boundary (`59 < yearday < 366`), and the parent's tests could not tell any of its boundary mutants apart. Two `<`-side mutants still survive the fix's tests, which is why the post-fix score is 66.67%. That is a remaining gap in dateutil's own tests, not a pymutate failure.
+- In every case, pymutate would have pointed at the missing test before the bug shipped.
 
-Three commits are a small sample, picked by hand from recent "fix" commits whose changed lines contain comparisons or arithmetic. They are proof that the mechanism works on a real project, not a detection-rate statistic. The 4d7875f run is dominated by the two baseline runs of the full suite; `--tests` scoping, as used for 71de7cb, is the practical mode. [httpx](https://github.com/encode/httpx) and [python-dateutil](https://github.com/dateutil/dateutil) have not been benchmarked. The self-test suite also proves the mechanism on a synthetic repository (`TestBenchmark` in `tests/test_sandbox_and_engine.py`).
+The two non-validated rows are real limits, and they are reported rather than hidden:
+
+- **packaging `55cbf1b`:** the changed lines contain an `is None` check guarding an assignment. pymutate does not mutate `is`/`is not`, and it only bypasses guards whose body ends in `return` or `raise`. Result: no mutants, NOT VALIDATED (exit 1).
+- **dateutil `2283058`:** the fix *changed the expected values* of existing tests in `tests/test_tzfile.py`. After rolling the tests back, the parent's tests assert the old buggy behaviour, so they fail against the fixed source. pymutate refuses to judge mutants against a red baseline and exits 2. The time-machine method only works when a fix adds or tightens tests rather than rewriting existing expectations.
+
+These seven commits are a small sample. They were picked by hand from "fix" commits whose changed lines contain comparisons, arithmetic, or guards, so they prove the mechanism works on real projects; they are not a detection-rate statistic. Most of the 4d7875f run is two baseline runs of the full suite; `--tests` scoping is the practical mode. The self-test suite also proves the mechanism on a synthetic repository (`TestBenchmark` in `tests/test_sandbox_and_engine.py`).
 
 ## Self-test suite
 
@@ -197,6 +224,7 @@ Engine tests build a throwaway `toyshop` project under `tmp_path`, so they never
 
 - **Equivalent mutants** (changes that cannot alter behaviour) count as survivors. Use `# pragma: no mutate` on such lines.
 - Identity and membership checks (`is`, `is not`, `in`) are not mutated, and guard bypass only applies to guards that `return` or `raise`. Fixes like packaging `55cbf1b` therefore produce no mutants.
+- The time-machine benchmark needs the parent commit's tests to pass against the fixed source. Fixes that rewrite existing test expectations, like dateutil `2283058`, stop at the pre-fix baseline with exit 2.
 - One subprocess per mutant gives strong isolation but costs pytest's startup time per mutant. Large suites should use `--diff-base` in PRs and run the full gate nightly.
 - Only pure-Python modules loaded through the normal import system are mutated. C extensions and code run via `exec()` are not.
 - Per-test coverage uses coverage.py's `ctrace` core. With the `sysmon` core (coverage.py's default on recent Pythons; observed here on 3.15), only the first test to hit a line was recorded, which under-reports covering tests.

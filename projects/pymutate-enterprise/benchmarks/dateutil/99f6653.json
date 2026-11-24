@@ -1,0 +1,37 @@
+{
+  "repo": "/private/tmp/dateutil",
+  "commit": "99f6653c0152ee1f7f91b30d764a67d407407938",
+  "parent": "208f5872937a3578058736708318b712aff29d6a",
+  "changed_files": {
+    "src/dateutil/tz/_tzfile.py": [
+      1243,
+      1263,
+      1264,
+      1265,
+      1267,
+      1268,
+      1269,
+      1270,
+      1321
+    ]
+  },
+  "validated": true,
+  "post_fix": {
+    "kill_score": 100.0,
+    "total": 17
+  },
+  "pre_fix": {
+    "kill_score": 94.12,
+    "total": 17
+  },
+  "detections": [
+    {
+      "mutant_id": "NumericBoundary-L1269-c3e4e7ee",
+      "file_path": "src/dateutil/tz/_tzfile.py",
+      "lineno": 1269,
+      "description": "[HIGH - BOUNDARY GAP] Shift comparison boundary 59 -> 58 in `d >= 59`",
+      "pre_fix_status": "SURVIVED",
+      "post_fix_status": "KILLED"
+    }
+  ]
+}

@@ -24,9 +24,9 @@ jobs:
       run:
         working-directory: projects/async-webhook-state-machine-qa
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
@@ -42,7 +42,7 @@ jobs:
 
       - name: Upload HTML report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: async-webhook-qa-report-py${{ matrix.python-version }}
           path: projects/async-webhook-state-machine-qa/report.html

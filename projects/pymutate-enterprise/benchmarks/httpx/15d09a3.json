@@ -1,0 +1,55 @@
+{
+  "repo": "/private/tmp/httpx",
+  "commit": "15d09a3bbc20372cd87e48f17f7c9381c8220a0f",
+  "parent": "7d7c4f15b8784e4a550d974139acfa64193b32c2",
+  "changed_files": {
+    "httpx/_utils.py": [
+      3,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      272,
+      462,
+      463,
+      464,
+      465,
+      466,
+      467,
+      468,
+      469,
+      470,
+      471,
+      472,
+      473,
+      474,
+      475,
+      476,
+      477
+    ]
+  },
+  "validated": true,
+  "post_fix": {
+    "kill_score": 100.0,
+    "total": 1
+  },
+  "pre_fix": {
+    "kill_score": 0.0,
+    "total": 1
+  },
+  "detections": [
+    {
+      "mutant_id": "ComparisonOperator-L269-7b8b43fc",
+      "file_path": "httpx/_utils.py",
+      "lineno": 269,
+      "description": "[HIGH - BOUNDARY GAP] Replace `==` with `!=` in `hostname.lower() == 'localhost'`",
+      "pre_fix_status": "UNCOVERED",
+      "post_fix_status": "KILLED"
+    }
+  ]
+}

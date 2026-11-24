@@ -1,0 +1,57 @@
+{
+  "repo": "/private/tmp/dateutil",
+  "commit": "d23ff760f8448b51579016d96f39590018445724",
+  "parent": "5391455e7c7839e300b63649041806fb5219432e",
+  "changed_files": {
+    "src/dateutil/relativedelta.py": [
+      211,
+      212,
+      213,
+      214,
+      215
+    ]
+  },
+  "validated": true,
+  "post_fix": {
+    "kill_score": 66.67,
+    "total": 6
+  },
+  "pre_fix": {
+    "kill_score": 0.0,
+    "total": 6
+  },
+  "detections": [
+    {
+      "mutant_id": "ComparisonOperator-L215-4a9e68d5",
+      "file_path": "src/dateutil/relativedelta.py",
+      "lineno": 215,
+      "description": "[HIGH - BOUNDARY GAP] Replace `<` with `<=` in `59 < yearday < 366`",
+      "pre_fix_status": "SURVIVED",
+      "post_fix_status": "KILLED"
+    },
+    {
+      "mutant_id": "NumericBoundary-L215-09e69272",
+      "file_path": "src/dateutil/relativedelta.py",
+      "lineno": 215,
+      "description": "[HIGH - BOUNDARY GAP] Shift comparison boundary 366 -> 367 in `59 < yearday < 366`",
+      "pre_fix_status": "SURVIVED",
+      "post_fix_status": "KILLED"
+    },
+    {
+      "mutant_id": "NumericBoundary-L215-0bf39063",
+      "file_path": "src/dateutil/relativedelta.py",
+      "lineno": 215,
+      "description": "[HIGH - BOUNDARY GAP] Shift comparison boundary 366 -> 365 in `59 < yearday < 366`",
+      "pre_fix_status": "SURVIVED",
+      "post_fix_status": "KILLED"
+    },
+    {
+      "mutant_id": "NumericBoundary-L215-fa88cc6e",
+      "file_path": "src/dateutil/relativedelta.py",
+      "lineno": 215,
+      "description": "[HIGH - BOUNDARY GAP] Shift comparison boundary 59 -> 60 in `59 < yearday < 366`",
+      "pre_fix_status": "SURVIVED",
+      "post_fix_status": "KILLED"
+    }
+  ]
+}

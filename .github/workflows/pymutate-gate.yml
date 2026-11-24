@@ -28,9 +28,9 @@ jobs:
       run:
         working-directory: projects/pymutate-enterprise
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
@@ -85,7 +85,7 @@ jobs:
 
       - name: Upload mutation reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: pymutate-reports-py${{ matrix.python-version }}
           path: |
@@ -97,7 +97,7 @@ jobs:
       - name: Publish SARIF to code scanning
         if: always() && matrix.python-version == '3.11' && hashFiles('projects/pymutate-enterprise/mutation-results.sarif') != ''
         continue-on-error: true
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: projects/pymutate-enterprise/mutation-results.sarif
           category: pymutate
