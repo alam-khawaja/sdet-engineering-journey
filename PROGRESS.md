@@ -2,13 +2,13 @@
 
 ## Current state
 
-Current focus: Week 7 — Docker refresh (light).
-Current topic: Image vs container; running a test suite inside a container.
-Current phase: Debug (Week 7).
+Current focus: Week 8 — Observability practice.
+Current topic: Expected → Actual → Evidence chain on a failed API case.
+Current phase: Understand (Week 8).
 Next diagnostic question: n/a.
-Completed topics: Week 1–6.
+Completed topics: Week 1–7.
 Blocked topics: LLM + MCP deferred as major checkpoints.
-Next action: Week 7 Debug — learner typos the image tag (noble → nobel), pushes, reads the "Initialize containers" error, classifies it, restores.
+Next action: Week 8 Understand — logs vs metrics vs traces, correlation id; learner restates in own words.
 
 ## Workspace and project state
 
@@ -16,8 +16,8 @@ Learning repository path: `/Users/alam/sdet-engineering-journey`
 Active project path: `/Users/alam/sdet-engineering-journey/projects/booking-api-automation`
 Work context: personal learning.
 Mode: Teach.
-Current milestone: Week 7 Docker refresh (light).
-Pending gates: Week 7 Understand/Implement/Debug/Explain; LLM + MCP major checkpoints.
+Current milestone: Week 8 observability practice.
+Pending gates: Week 8 Understand/Implement/Debug/Explain; LLM + MCP major checkpoints.
 Evidence paths: `projects/booking-api-automation/`, `PROGRESS.md`, `PORTFOLIO.md`.
 Personal GitHub repository URLs: https://github.com/alam-khawaja/sdet-engineering-journey
 Standing publication authorization: initial bootstrap push authorized by learner request to set up personal GitHub with this journey (2026-10-07). Further milestone pushes on request unless standing auth is expanded.
@@ -375,4 +375,18 @@ Standing publication authorization: initial bootstrap push authorized by learner
 - Key insight: host and container report different OS — the tests only see the image.
 - AI assistance: mentor wrote the workflow change and pushed on request; learner read and interpreted the log.
 - Exact next action: Debug drill — break the image tag and read the error.
+
+### 2026-11-23 — Week 7 Debug done
+
+- Learner typo'd tag to `v1.65.1-nobel` and pushed (49df17a). Learner pasted the log: "Initialize containers" → `failed to resolve reference ... not found`, 3 pull attempts with backoff, then `Docker pull failed with exit code 1` (run 45179958628).
+- Mentor explained: 3/3 identical `not found` = consistent naming error, not a transient network blip; tests never started.
+- Learner asked to push before restoring; mentor restored `noble` and pushed (8ae9635), CI green (run 45180375009).
+- Gap: learner has not yet stated the setup-vs-test classification in own words — folded into Explain.
+- Exact next action: Explain gate.
+
+### 2026-11-23 — Week 7 Explain done; Week 7 closed
+
+- Explain (learner): the environment could not provide the image, so the container never got ready ("could not resolve") — a setup failure, tests never ran. Docker is for running tests isolated from outside changes — nobody can change data or versions — a stable environment; overkill when that isn't required.
+- Mentor polish: setup failures stop before "Run API tests"; test/product failures happen inside it. API-only booking suite works fine without Docker; UI suites needing pinned browsers benefit most.
+- Exact next action: Week 8 observability — Understand gate.
 

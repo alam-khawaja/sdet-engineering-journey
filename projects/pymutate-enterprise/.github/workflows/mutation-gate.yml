@@ -1,0 +1,71 @@
+name: mutation-gate
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  self-test-and-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install pymutate
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+
+      - name: Self-test suite (must be 100% green)
+        run: pytest tests/ -q
+
+      - name: Mutation gate on demo_sut (weak tests must be caught, exit 1)
+        run: |
+          set +e
+          python -m pymutate.cli run \
+            --html mutation-report.html \
+            --sarif mutation-results.sarif
+          code=$?
+          set -e
+          echo "pymutate exit code: $code"
+          if [ "$code" -ne 1 ]; then
+            echo "::error::Expected pymutate to fail the gate (exit 1) on the intentionally weak demo_tests, got $code"
+            exit 1
+          fi
+          echo "Gate correctly rejected the weak demo test suite."
+
+      - name: Upload mutation reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mutation-reports-py${{ matrix.python-version }}
+          path: |
+            mutation-report.html
+            mutation-results.sarif
+          if-no-files-found: warn
+          retention-days: 14
+
+      - name: Publish SARIF to code scanning
+        if: always() && matrix.python-version == '3.11' && hashFiles('mutation-results.sarif') != ''
+        continue-on-error: true
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: mutation-results.sarif
+          category: pymutate

@@ -16,6 +16,7 @@ Review target: June 2027. Status: diagnostic pending; no mastery claimed yet.
 
 - **[Booking API automation](projects/booking-api-automation/)** — main interview demo (auth + booking lifecycle + CI reports)
 - **[Async webhook state machine QA](projects/async-webhook-state-machine-qa/)** — Python/pytest: race conditions, idempotency, DLQ resilience, signed webhooks
+- **[pymutate-enterprise](projects/pymutate-enterprise/)** — Python mutation testing engine: in-memory AST mutants, per-test targeting, SQLite cache, SARIF/HTML reports, CI quality gate, git time-machine benchmark
 - [JSONPlaceholder smoke](smoke/) — earlier learning CIP slice
 
 ## Working with Cursor

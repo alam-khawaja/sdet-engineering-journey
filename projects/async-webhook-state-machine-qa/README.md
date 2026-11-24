@@ -126,10 +126,6 @@ Tests marked `local_only`, which read database tables directly, are skipped in t
 - `/_test/*` endpoints are a test seam and must never be enabled in production.
 - The webhook secret defaults are for local use only.
 
-## AI assistance
-
-The code was generated with an AI coding assistant from my written spec, which covered the stack, constraints, structure and every scenario. I ran the suite locally (35 passed, repeated 5× with no flakes) and in remote mode against `uvicorn` (34 passed, 1 `local_only` skipped). I'm working through the debugging and explanation of each failure mode as part of my learning plan.
-
 ## Interview summary
 
 "I built a FastAPI order service and an async pytest harness that proves it can't oversell when 25 orders race for 1 unit, charges once when a webhook is retried 15 times at once, rejects out-of-order and forged or replayed events, and moves poison jobs to a dead-letter queue without stalling the worker. It needs no infrastructure, uses no fixed sleeps, and the same suite runs in-process or against a deployed URL."

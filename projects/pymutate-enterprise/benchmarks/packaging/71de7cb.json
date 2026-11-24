@@ -1,0 +1,30 @@
+{
+  "repo": "/private/tmp/packaging",
+  "commit": "71de7cb379c8b08efb46f099a3b0447ef914a348",
+  "parent": "5fc2cf50f2dad5e6fef06be4927ee4cc1e94e313",
+  "changed_files": {
+    "src/packaging/pylock.py": [
+      610,
+      611
+    ]
+  },
+  "validated": true,
+  "post_fix": {
+    "kill_score": 100.0,
+    "total": 3
+  },
+  "pre_fix": {
+    "kill_score": 66.67,
+    "total": 3
+  },
+  "detections": [
+    {
+      "mutant_id": "ComparisonOperator-L611-c7af95b8",
+      "file_path": "src/packaging/pylock.py",
+      "lineno": 611,
+      "description": "[HIGH - BOUNDARY GAP] Replace `<` with `<=` in `Version('1') <= pylock.lock_version < Version('2.dev0')`",
+      "pre_fix_status": "SURVIVED",
+      "post_fix_status": "KILLED"
+    }
+  ]
+}

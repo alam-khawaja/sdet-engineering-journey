@@ -10,12 +10,19 @@ Unchecked means pending, not failed. Every completed item needs dated evidence.
 
 ## Active topic
 
-Topic: Week 7 — Docker refresh (light): image vs container, when Docker helps CI (started 2026-11-23).
+Topic: Week 8 — Observability practice: Expected → Actual → Evidence chain on a failed API case (started 2026-11-23).
+
+- [ ] Understand: logs vs metrics vs traces; what a request/correlation id is for.
+- [ ] Implement: make one booking test fail and write a hypothesis → evidence note from the report/trace.
+- [ ] Debug: find the exact request/response behind the failure in the trace.
+- [ ] Explain: Expected → Actual → Evidence → Classification, in 3 lines.
+
+### Week 7 (closed 2026-11-23)
 
 - [x] Understand: image = blueprint, container = running instance; pinned image avoids version drift across machines for UI tests — learner 2026-11-23.
 - [x] Implement: booking suite ran in CI inside `playwright:v1.65.1-noble` — 3 passed (935ms); host Ubuntu 26.04 vs container 24.04.5, Node v26.13.1, uid 1001 (run 45178015825) — 2026-11-23.
-- [ ] Debug: break one thing (port/env/mount) and read the error.
-- [ ] Explain: when Docker helps a test suite and when it is overhead.
+- [x] Debug: typo'd image tag (nobel) → "Initialize containers" failed with `not found` after 3 pull retries (run 45179958628); restored, green (run 45180375009) — 2026-11-23. Learner's own classification (setup vs test failure) carried into Explain.
+- [x] Explain: image-tag failure = environment/setup (container could not be prepared, "could not resolve"), tests never ran; Docker helps when you need an isolated, pinned, stable environment, overkill when not required — learner 2026-11-23.
 
 ### Week 6 (closed 2026-11-23)
 

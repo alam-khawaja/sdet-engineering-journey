@@ -1,0 +1,52 @@
+{
+  "repo": "/private/tmp/packaging",
+  "commit": "4d7875f85e64aa9d56fe69af5eb017e796659fd1",
+  "parent": "7f97c257563e57a85627bb7e2d6b165ccee67fbf",
+  "changed_files": {
+    "src/packaging/_parser.py": [
+      359,
+      360,
+      361,
+      362,
+      363,
+      364,
+      375,
+      379,
+      382,
+      387,
+      395,
+      396,
+      397,
+      398,
+      399,
+      407
+    ]
+  },
+  "validated": true,
+  "post_fix": {
+    "kill_score": 100.0,
+    "total": 2
+  },
+  "pre_fix": {
+    "kill_score": 0.0,
+    "total": 2
+  },
+  "detections": [
+    {
+      "mutant_id": "ComparisonOperator-L395-ee5da355",
+      "file_path": "src/packaging/_parser.py",
+      "lineno": 395,
+      "description": "[HIGH - BOUNDARY GAP] Replace `>=` with `>` in `depth >= _MAX_MARKER_NESTING`",
+      "pre_fix_status": "SURVIVED",
+      "post_fix_status": "KILLED"
+    },
+    {
+      "mutant_id": "ArithmeticOperator-L407-cc729663",
+      "file_path": "src/packaging/_parser.py",
+      "lineno": 407,
+      "description": "[MEDIUM - CALCULATION BUG] Replace `+` with `-` in `depth + 1`",
+      "pre_fix_status": "SURVIVED",
+      "post_fix_status": "KILLED"
+    }
+  ]
+}

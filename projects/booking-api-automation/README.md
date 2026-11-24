@@ -38,10 +38,6 @@ npx playwright show-report
 
 Week 6 practice: force a wrong assertion, open the HTML report / trace, classify **real product failure** vs **bad test expectation** (Expected vs Received).
 
-## AI assistance
-
-Mentor scaffolded the project layout and first tests; learner runs, explains, extends, and owns evidence in the journey portfolio.
-
 ## Limitations
 
 - Depends on a third-party heroku demo (can be slow/flaky/down).

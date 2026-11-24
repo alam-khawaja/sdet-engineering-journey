@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pymutate-enterprise"
+version = "1.0.0"
+description = "In-memory AST mutation testing with coverage-targeted test selection, SQLite caching, HTML/SARIF reports, and git time-machine benchmarking."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "pytest>=8.0",
+    "coverage>=7.4",
+]
+
+[project.scripts]
+pymutate = "pymutate.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["pymutate*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.pymutate]
+paths = ["demo_sut"]
+tests = ["demo_tests"]
+default_min_score = 80.0
+path_thresholds = { "demo_sut/credit_underwriting.py" = 90.0 }
+exclude = ["**/__init__.py"]
+workers = 4
+timeout_multiplier = 3.0
+min_timeout_sec = 3.0
+cache_path = ".pymutate_cache.db"
+html_report = "mutation-report.html"
+sarif_report = "mutation-results.sarif"

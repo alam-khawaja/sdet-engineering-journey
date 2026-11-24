@@ -1,0 +1,31 @@
+{
+  "repo": "/private/tmp/packaging",
+  "commit": "55cbf1b9426f44455fa1a9e0836f1fc082cc8452",
+  "parent": "4840c3a6817fbd0831f7e520c9a55367472a4a08",
+  "changed_files": {
+    "src/packaging/_ranges.py": [
+      181,
+      182,
+      190,
+      191,
+      192,
+      193,
+      243,
+      244,
+      252,
+      253,
+      254,
+      255
+    ]
+  },
+  "validated": false,
+  "post_fix": {
+    "kill_score": 100.0,
+    "total": 0
+  },
+  "pre_fix": {
+    "kill_score": 100.0,
+    "total": 0
+  },
+  "detections": []
+}
